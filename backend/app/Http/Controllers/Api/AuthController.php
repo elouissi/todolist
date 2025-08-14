@@ -24,15 +24,17 @@ class AuthController extends Controller
         $this->authService = $authService;
     }
 
-    public function register(Request $request)
+       public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
-            'image' => 'nullable|image|max:2048',
+            'password' => 'required|string|min:8|confirmed',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'phone_number' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
+            'job_title' => 'nullable|string|max:100',
+            'department' => 'nullable|string|max:100'
         ]);
 
         if ($validator->fails()) {
@@ -41,9 +43,16 @@ class AuthController extends Controller
 
         try {
             $user = $this->authService->register($request->all());
-            return $this->successResponse($user, 'Compte créé avec succès', 201);
+            
+            // Marquer l'utilisateur comme actif
+            $user->markAsActive();
+            
+            return $this->successResponse([
+                'user' => $user,
+                'message' => 'Bienvenue sur TaskFlow Pro ! Votre compte a été créé avec succès.'
+            ], 'Inscription réussie', 201);
         } catch (\Exception $e) {
-            return $this->serverErrorResponse('Une erreur s\'est produite lors de la création du compte.');
+            return $this->serverErrorResponse('Erreur lors de la création de votre compte TaskFlow Pro.');
         }
     }
 
@@ -59,16 +68,26 @@ class AuthController extends Controller
         }
 
         try {
-            $token = $this->authService->login($request->only('email', 'password'));
-            if (!$token) {
+            $result = $this->authService->login($request->only('email', 'password'));
+            
+            if (!$result) {
                 return $this->authErrorResponse('invalid_credentials');
             }
 
-            return $this->successResponse(['token' => $token], 'Connexion réussie');
-        } catch (JWTException $e) {
+            // Marquer l'utilisateur comme actif
+            Auth::user()->markAsActive();
+
+            return $this->successResponse([
+                'token' => $result,
+                'user' => Auth::user(),
+                'message' => 'Bon retour sur TaskFlow Pro !'
+            ], 'Connexion réussie');
+        } catch (\Exception $e) {
             return $this->authErrorResponse('authentication_error');
         }
     }
+
+ 
 
     public function logout()
     {

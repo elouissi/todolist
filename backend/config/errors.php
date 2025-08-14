@@ -13,8 +13,8 @@ return [
 
     'auth' => [
         'token_expired' => [
-            'error' => 'Token expiré',
-            'message' => 'Votre session a expiré. Veuillez vous reconnecter.',
+            'error' => 'Session expirée',
+            'message' => 'Votre session a expiré. Veuillez vous reconnecter à TaskFlow Pro.',
             'code' => 'TOKEN_EXPIRED'
         ],
         'token_invalid' => [
@@ -32,14 +32,14 @@ return [
             'message' => 'Token d\'authentification requis.',
             'code' => 'TOKEN_MISSING'
         ],
-        'invalid_credentials' => [
-            'error' => 'Identifiants invalides',
-            'message' => 'L\'email ou le mot de passe est incorrect.',
+           'invalid_credentials' => [
+            'error' => 'Identifiants incorrects',
+            'message' => 'Email ou mot de passe incorrect. Vérifiez vos informations.',
             'code' => 'INVALID_CREDENTIALS'
         ],
-        'user_not_found' => [
-            'error' => 'Utilisateur non trouvé',
-            'message' => 'Aucun utilisateur correspondant à ce token.',
+         'user_not_found' => [
+            'error' => 'Utilisateur introuvable',
+            'message' => 'Aucun compte TaskFlow Pro associé à ces informations.',
             'code' => 'USER_NOT_FOUND'
         ],
         'authentication_error' => [
