@@ -1,0 +1,37 @@
+{
+  "name": "tasks-manager-frontend",
+  "version": "1.0.0",
+  "description": "Frontend Vue.js pour l'application Tasks Manager",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.2.0",
+    "axios": "^1.5.0",
+    "laravel-echo": "^1.15.3",
+    "pinia": "^2.1.6",
+    "pusher-js": "^8.3.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4",
+    "vue-toastification": "^2.0.0-rc.5"
+  },
+  "devDependencies": {
+    "@shadcn/ui": "^0.0.4",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "autoprefixer": "^10.4.15",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "lucide-vue-next": "^0.525.0",
+    "postcss": "^8.4.29",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7",
+    "vite": "^4.4.9"
+  }
+}
